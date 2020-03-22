@@ -20,32 +20,43 @@ require_once 'Pokemon.php';
         <form method="post" action="route.php?url=Pokemon/Fight">
             <table>
                 <?php require "dataLayer.php";
-                $pokemons = GetAllPokemonNames(); ?>
-                <p>Choose your Pokemon: <select name="pokemon_name" required>
-                        <?php foreach ($pokemons as $pokemon) { ?>
-                            <option value="<?php echo $pokemon['Id']; ?>"><?php echo $pokemon['Pokemon_Name']; ?></option>
-                        <?php } ?>
-                    </select></p>
+                $pokemons = GetAllPokemonNames();
+                $pokemons1 = GetAllPokemonNames(); ?>
+                <p>Choose your Pokemon:
+                    <label>
+                        <select name="pokemon_name" required>
+                            <?php foreach ($pokemons as $pokemon) { ?>
+                                <option value="<?php echo $pokemon['Pokemon_Name']; ?>"><?php echo $pokemon['Pokemon_Name']; ?></option>
+                            <?php } ?>
+                        </select>
+                    </label>
+                </p>
+
+                <p>Choose an attack:
+                    <label>
+                        <select name="attack" required>
+                            <?php $attacks = GetAllPokemonAttacks();
+                            foreach ($attacks as $attack) { ?>
+                                <option value="<?php echo $attack['Attack_Name']; ?>"><?php echo $attack['Attack_Name']; ?></option>
+                                <?php
+                            } ?>
+                        </select>
+                    </label>
+                </p>
+
                 <p>Attack</p>
-                <p>Choose a Pokemon to play against: <select name="pokemon_name_against" required>
-                        <?php foreach ($pokemons as $pokemon) { ?>
-                            <option value="<?php echo $pokemon['Id']; ?>"><?php echo $pokemon['Pokemon_Name']; ?></option>
-                        <?php } ?>
-                    </select></p>
+
+                <p>Choose a Pokemon to play against:
+                    <label>
+                        <select name="pokemon_attack" required>
+                            <?php foreach ($pokemons1 as $pokemon1) { ?>
+                                <option value="<?php echo $pokemon1['Pokemon_Name']; ?>"><?php echo $pokemon1['Pokemon_Name']; ?></option>
+                            <?php } ?>
+                        </select>
+                    </label>
+                </p>
             </table>
             <input type="submit" value="Fight"/>
-        </form>
-
-        <form action="">
-            <table>
-                <p>Choose an attack: <select name="pokemon_attack" required>
-                        <?php $attacks = GetAllPokemonAttacks();
-                        foreach ($attacks as $attack) { ?>
-                            <option value="<?php echo $attack['Id']; ?>"><?php echo $attack['Attack_Name']; ?></option>
-                        <?php } ?>
-                    </select></p>
-                <input type="submit" value="Choosse"/>
-            </table>
         </form>
 
         <div>

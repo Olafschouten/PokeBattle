@@ -1,6 +1,6 @@
 <?php
 
-require 'view/renderview.php';
+require 'Pokemon.php';
 
 // http://todo.localhost/route.php?url=task/add
 // met apache rewrite kun je dat schrijven als http://todo.localhost/task/add
@@ -8,7 +8,7 @@ require 'view/renderview.php';
 
 // Als er iets in de key url zit van $_GET, wordt de code uitgevoerd
 if (isset($_GET['url'])) {
-    $redirect_to = 'http://todo.localhost';
+    $redirect_to = 'http://localhost:8080/PokeBettle/';
 
     // Met trim haal je de zwevende shlashes weg. Bijvoorbeeld:
     // /Students/Edit/1/ wordt Students/Edit/1
@@ -44,8 +44,9 @@ if (isset($_GET['url'])) {
 
     // bepaal welk bestand er geladen moet worden, en roep de gevraagde functie aan
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && $url['controller'] == 'Pokemon' && $url['action'] == 'Fight') {
-        Fight($_POST);
+//        ShowData($_POST['pokemon_name'], $_POST['pokemon_name'], $_POST['pokemon_name'] );
+        ShowData($_POST);
         // redirect naar overzicht pagina met lijst van alle tasks
-        header('Location: ' . $redirect_to);
+//        header('Location: ' . $redirect_to);
     }
 }
