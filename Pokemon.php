@@ -2,108 +2,91 @@
 
 class Pokemon
 {
-    public $firstPokemon;
-    public $firstPokemonHealth;
-    public $attackDamage;
-    public $lastPokemon;
-    public $lastPokemonHealth;
-    public $CurrentHealthFirstPokemon;
-    public $CurrentHealthLastPokemon;
+    // Properties
+    private $name = '';
+    private $energyType = '';
+    private $max_Health = 0;
+    private $health = 0;
+    private $weakness = '';
+    private $weakness_multiplier = 0;
+    private $resistance = '';
+    private $resistance_points = 0;
 
-    public function __construct($firstPokemon, $firstPokemonHealth, $attackDamage, $lastPokemon, $lastPokemonHealth)
+    public function __construct($data)
     {
-        $this->firstPokemon = $firstPokemon;
-        $this->firstPokemonHealth = $firstPokemonHealth;
-        $this->attackDamage = $attackDamage;
-        $this->lastPokemon = $lastPokemon;
-        $this->lastPokemonHealth = $lastPokemonHealth;
+        $this->name = $data[0]['Pokemon_Name'];
+        $this->energyType = $data[0]['EnergyType'];
+        $this->max_Health = $data[0]['Max_Health'];
+        $this->health = $data[0]['Max_Health'];
+        $this->weakness = $data[0]['WeaknessType'];
+        $this->weakness_multiplier = $data[0]['Weakness_Multiplier'];
+        $this->resistance = $data[0]['ResistanceType'];
+        $this->resistance_points = $data[0]['Resistance_Points'];
+        $_SESSION['health'] = 50;
     }
 
-    public function fight()
+    // All getter functions
+    public function getName()
     {
-        if ($this->getPopulation() === TRUE) {
-            $healthStatus = $this->getPopulation();
+        return $this->name;
+    }
 
+    public function getEnergyType()
+    {
+        return $this->energyType;
+    }
+
+    public function getMaxHealth()
+    {
+        return $this->max_Health;
+    }
+
+    public function getHealth()
+    {
+        return $this->health;
+    }
+
+    public function getWeakness()
+    {
+        return $this->weakness;
+    }
+
+    public function getWeaknessMultiplier()
+    {
+        return $this->weakness_multiplier;
+    }
+
+    public function getResistance()
+    {
+        return $this->resistance;
+    }
+
+    public function getResistancePoints()
+    {
+        return $this->resistance_points;
+    }
+
+    public function fight($againstPokemon, $attack)
+    {
+        $againstPokemonHealth = $againstPokemon->getHealth() - $attack[0]['Hit_Points'];
+        $this->health = $this->health - 15;
+
+
+//        echo $againstPokemonHealth . '<br>';
+
+        if ($this->getPopulation($againstPokemon) === TRUE) {
+            echo ' The game isnt over jet' . '<br>';
         }
     }
 
-    public function getPopulation()
+    public function getPopulation($againstPokemon)
     {
-        if ($this->CurrentHealthFirstPokemon >= 1 && $this->CurrentHealthLastPokemon >= 1) {
+        if ($this->health >= 1 && $againstPokemon->getHealth() >= 1) {
+            echo $againstPokemon->getHealth() . '<br>';
             return TRUE;
         } else {
+            echo $againstPokemon->getHealth() . '<br>';
             return FALSE;
         }
-
     }
-
-    public function attack()
-    {
-        $this->CurrentHealthLastPokemon = $this->CurrentHealthLastPokemon - $this->attackDamage;
-        $this->CurrentHealthFirstPokemon = $this->CurrentHealthFirstPokemon - 20;
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    // Properties
-//    public $name;
-//    public $energyType;
-//    public $max_Health;
-//    public $health;
-//    public $weakness;
-//    public $weakness_multiplier;
-//    public $resistance;
-//    public $resistance_points;
-//
-//    // Take al the parameters and stets the public variable
-//    public function __construct($name, $energyType, $Max_Health, $weakness, $weakness_multiplier, $resistance, $resistance_points)
-//    {
-//        $this->name = $name;
-//        $this->energyType = $energyType;
-//        $this->max_Health = $Max_Health;
-//        $this->health = $this->max_Health;
-//        $this->weakness = $weakness;
-//        $this->weakness_multiplier = $weakness_multiplier;
-//        $this->resistance = $resistance;
-//        $this->resistance_points = $resistance_points;
-//    }
-//
-//    // if the check pokemon is dead or not
-//    public function getPopulation()
-//    {
-//        // returns true of false
-//    }
-//
-//    // function where you can fight with another pokemon
-//    public function attack()
-//    {
-//
-//    }
-//
-//    // if the check pokemon is dead or not
-//    public function getPopulationHealth()
-//    {
-//
-//    }
-//
-//    // converts request to sting
-//    public function __toString()
-//    {
-//        return json_encode($this);
-//    }
 }
