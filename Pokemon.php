@@ -68,25 +68,45 @@ class Pokemon
 
     public function fight($againstPokemon, $attack)
     {
-        $againstPokemonHealth = $againstPokemon->getHealth() - $attack[0]['Hit_Points'];
-        $this->health = $this->health - 15;
+        if ($_SESSION['pokemon_health'] === null) {
+            $_SESSION['pokemon_health'] = $this->health;
+            $_SESSION['against_pokemon_health'] = $againstPokemon->getHealth();
+        }
 
+        while ($_SESSION['against_pokemon_health'] >= 1 && $_SESSION['pokemon_health'] >= 1) {
+            if (!$_SESSION['against_pokemon_health'] <= 0) {
+//                if ($this->energyType == $againstPokemon->getWeakness()) {
+//                    $_SESSION['against_pokemon_health'] = $_SESSION['against_pokemon_health'] - ($attack[0]['Hit_Points'] * 1.3);
+//                } else if ($this->energyType == $againstPokemon->getResistance()) {
+//                    $_SESSION['against_pokemon_health'] = $_SESSION['against_pokemon_health'] - ($attack[0]['Hit_Points'] * 0.7);
+//                } else {
+//                    $_SESSION['against_pokemon_health'] = $_SESSION['against_pokemon_health'] - $attack[0]['Hit_Points'];
+//                }
 
-//        echo $againstPokemonHealth . '<br>';
+                $_SESSION['against_pokemon_health'] = $_SESSION['against_pokemon_health'] - $attack[0]['Hit_Points'];
+                $_SESSION['pokemon_health'] = $_SESSION['pokemon_health'] - 15;
 
-        if ($this->getPopulation($againstPokemon) === TRUE) {
-            echo ' The game isnt over jet' . '<br>';
+                if ($_SESSION['against_pokemon_health'] <= 0) {
+                    $_SESSION['against_pokemon_health'] = 0;
+                    echo 'You won!' . '<br>';
+                } else if ($_SESSION['pokemon_health'] <= 0) {
+                    $_SESSION['pokemon_health'] = 0;
+                    echo 'You loose!' . '<br>';
+                }
+                echo 'Your pokemon : ' . $_SESSION['pokemon_health'] . ' Health' . '</br>';
+                echo 'Pokemon you play against : ' . $_SESSION['against_pokemon_health'] . ' Health' . '</br>';
+            }
         }
     }
 
-    public function getPopulation($againstPokemon)
-    {
-        if ($this->health >= 1 && $againstPokemon->getHealth() >= 1) {
-            echo $againstPokemon->getHealth() . '<br>';
-            return TRUE;
-        } else {
-            echo $againstPokemon->getHealth() . '<br>';
-            return FALSE;
-        }
-    }
+//    public function getPopulation($againstPokemon)
+//    {
+//        if ($this->health >= 1 && $againstPokemon->getHealth() >= 1) {
+//            echo $againstPokemon->getHealth() . '<br>';
+//            return TRUE;
+//        } else {
+//            echo $againstPokemon->getHealth() . '<br>';
+//            return FALSE;
+//        }
+//    }
 }

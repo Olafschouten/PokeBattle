@@ -41,7 +41,6 @@ SELECT
     p.Max_Health,
     p.Resistance_Points,
     p.Weakness_Multiplier,
-    EnergyTypes.Color,
 	ET.EnergyType_Name AS EnergyType,
     RT.EnergyType_Name AS ResistanceType,
     WT.EnergyType_Name AS WeaknessType
@@ -109,17 +108,3 @@ WHERE p.Id = :Id");
     $conn = null;
     return $query->fetchAll();
 }
-
-//function Fight()
-//{
-//    if (!$_SESSION['pokemon_attack'][0]['Max_Health'] <= 0) {
-//        $_SESSION['pokemon_attack'][0]['Max_Health'] = $_SESSION['pokemon_attack'][0]['Max_Health'] - $_SESSION['attack_stats'][0]['Hit_Points'];
-//        $_SESSION['pokemon_stats'][0]['Max_Health'] = $_SESSION['pokemon_stats'][0]['Max_Health'] - 15;
-//
-//        echo $_SESSION['pokemon_attack'][0]['Pokemon_Name'] . ' ' . $_SESSION['pokemon_attack'][0]['Max_Health'] . ' Health' . '</br>';
-//        echo $_SESSION['pokemon_stats'][0]['Pokemon_Name'] . ' ' . $_SESSION['pokemon_stats'][0]['Max_Health'] . ' Health' . '</br>';
-//        if ($_SESSION['pokemon_attack'][0]['Max_Health'] <= 0) {
-//            echo 'You won!';
-//        }
-//    }
-//}
