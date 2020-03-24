@@ -69,24 +69,25 @@ require "dataLayer.php";
                             <?php
                             echo '<hr>';
                             echo 'Name: ' . $pokemon['Pokemon_Name'] . '<br>';
-                            echo 'EnergyType : '; ?>
+                            echo 'EnergyType: '; ?>
                             <button class="btn"
                                     style="background-color: <?php echo $pokemon['EnergyTypeColor'] ?>;"><?php echo $pokemon['EnergyType'] ?></button>
                         </p>
                         <img src="https://img.pokemondb.net/artwork/large/<?php echo strtolower($pokemon['Pokemon_Name']); ?>.jpg"
                              alt="<?php echo strtolower($pokemon['Pokemon_Name']); ?>" style="max-height: 100px;">
                         <p>
-                            <?php echo 'WeaknessType : '; ?>
+                            <?php echo 'WeaknessType: '; ?>
                             <button class="btn"
                                     style="background-color: <?php echo $pokemon['WeaknessTypeColor'] ?>;"><?php echo $pokemon['WeaknessType'] ?></button>
                         </p>
                         <p>
-                            <?php echo 'ResistanceType : '; ?>
+                            <?php echo 'ResistanceType: '; ?>
                             <button class="btn"
                                     style="background-color: <?php echo $pokemon['ResistanceTypeColor'] ?>;"><?php echo $pokemon['ResistanceType'] ?></button>
                         </p>
                     </div>
-                <?php } } else {
+                <?php }
+            } else {
                 $yourPokemonData = GetPokemonData($_POST['your_pokemon_id']);
                 $againstPokemonData = GetPokemonData($_POST['against_pokemon_id']);
                 $attackData = GetAttackData($_POST['attack_id']);
