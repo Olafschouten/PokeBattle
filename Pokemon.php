@@ -22,7 +22,6 @@ class Pokemon
         $this->weakness_multiplier = $data[0]['Weakness_Multiplier'];
         $this->resistance = $data[0]['ResistanceType'];
         $this->resistance_points = $data[0]['Resistance_Points'];
-        $_SESSION['health'] = 50;
     }
 
     // All getter functions
@@ -68,23 +67,24 @@ class Pokemon
 
     public function fight($againstPokemon, $attack)
     {
-        if ($_SESSION['pokemon_health'] === null) {
+        if (!isset($_SESSION['pokemon_health'])) {
             $_SESSION['pokemon_health'] = $this->health;
             $_SESSION['against_pokemon_health'] = $againstPokemon->getHealth();
+            $_SESSION['round_count'] = 1;
         }
 
         while ($_SESSION['against_pokemon_health'] >= 1 && $_SESSION['pokemon_health'] >= 1) {
             if (!$_SESSION['against_pokemon_health'] <= 0) {
-//                if ($this->energyType == $againstPokemon->getWeakness()) {
-//                    $_SESSION['against_pokemon_health'] = $_SESSION['against_pokemon_health'] - ($attack[0]['Hit_Points'] * 1.3);
-//                } else if ($this->energyType == $againstPokemon->getResistance()) {
-//                    $_SESSION['against_pokemon_health'] = $_SESSION['against_pokemon_health'] - ($attack[0]['Hit_Points'] * 0.7);
-//                } else {
-//                    $_SESSION['against_pokemon_health'] = $_SESSION['against_pokemon_health'] - $attack[0]['Hit_Points'];
-//                }
+                if ($this->energyType == $againstPokemon->getWeakness()) {
+                    $_SESSION['against_pokemon_health'] = $_SESSION['against_pokemon_health'] - ($attack[0]['Hit_Points'] * 1.3);
+                } else if ($this->energyType == $againstPokemon->getResistance()) {
+                    $_SESSION['against_pokemon_health'] = $_SESSION['against_pokemon_health'] - ($attack[0]['Hit_Points'] * 0.7);
+                } else {
+                    $_SESSION['against_pokemon_health'] = $_SESSION['against_pokemon_health'] - $attack[0]['Hit_Points'];
+                }
+                echo '<br>';
 
-                $_SESSION['against_pokemon_health'] = $_SESSION['against_pokemon_health'] - $attack[0]['Hit_Points'];
-                $_SESSION['pokemon_health'] = $_SESSION['pokemon_health'] - 15;
+                $_SESSION['pokemon_health'] = $_SESSION['pokemon_health'] - 10;
 
                 if ($_SESSION['against_pokemon_health'] <= 0) {
                     $_SESSION['against_pokemon_health'] = 0;
@@ -93,8 +93,10 @@ class Pokemon
                     $_SESSION['pokemon_health'] = 0;
                     echo 'You loose!' . '<br>';
                 }
-                echo 'Your pokemon : ' . $_SESSION['pokemon_health'] . ' Health' . '</br>';
-                echo 'Pokemon you play against : ' . $_SESSION['against_pokemon_health'] . ' Health' . '</br>';
+                echo 'Round: ' . $_SESSION['round_count'] . '<br>';
+                echo 'Your pokemon: ' . $_SESSION['pokemon_health'] . ' Health' . '</br>';
+                echo 'Pokemon you play against: ' . $_SESSION['against_pokemon_health'] . ' Health' . '</br>';
+                $_SESSION['round_count']++;
             }
         }
     }

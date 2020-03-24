@@ -3,8 +3,6 @@
 require 'Pokemon.php';
 require "dataLayer.php";
 
-//$pikachu->attack($charmeleon);
-
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +17,7 @@ require "dataLayer.php";
 <body class="bg-dark">
 <div class="d-flex justify-content-center">
     <div class="bg-white p-4 container">
+        <a href="test.php">test</a>
         <h1>Choose your Pokemon</h1>
         <form method="post" action="index.php">
             <table>
@@ -65,35 +64,31 @@ require "dataLayer.php";
             if (!isset($_POST['fight'])) {
                 $pokemons = GetAllPokemonsData();
                 foreach ($pokemons as $pokemon) { ?>
-                    <div class="pokemon_item col-sm">
+                    <div class="col-sm">
                         <p>
                             <?php
                             echo '<hr>';
                             echo 'Name: ' . $pokemon['Pokemon_Name'] . '<br>';
                             echo 'EnergyType : '; ?>
                             <button class="btn"
-                                    style="background-color: <?php echo $pokemon['Color'] ?>;"><?php echo $pokemon['EnergyType'] ?></button>
+                                    style="background-color: <?php echo $pokemon['EnergyTypeColor'] ?>;"><?php echo $pokemon['EnergyType'] ?></button>
                         </p>
                         <img src="https://img.pokemondb.net/artwork/large/<?php echo strtolower($pokemon['Pokemon_Name']); ?>.jpg"
                              alt="<?php echo strtolower($pokemon['Pokemon_Name']); ?>" style="max-height: 100px;">
                         <p>
                             <?php echo 'WeaknessType : '; ?>
                             <button class="btn"
-                                    style="background-color: <?php echo $pokemon['Color'] ?>;"><?php echo $pokemon['WeaknessType'] ?></button>
+                                    style="background-color: <?php echo $pokemon['WeaknessTypeColor'] ?>;"><?php echo $pokemon['WeaknessType'] ?></button>
                         </p>
                         <p>
                             <?php echo 'ResistanceType : '; ?>
                             <button class="btn"
-                                    style="background-color: <?php echo $pokemon['Color'] ?>;"><?php echo $pokemon['ResistanceType'] ?></button>
+                                    style="background-color: <?php echo $pokemon['ResistanceTypeColor'] ?>;"><?php echo $pokemon['ResistanceType'] ?></button>
                         </p>
                     </div>
-                <?php } ?>
-
-            <?php } else {
+                <?php } } else {
                 $yourPokemonData = GetPokemonData($_POST['your_pokemon_id']);
-
                 $againstPokemonData = GetPokemonData($_POST['against_pokemon_id']);
-
                 $attackData = GetAttackData($_POST['attack_id']);
 
 //                echo "<pre>", var_dump($attackData), "</pre>";

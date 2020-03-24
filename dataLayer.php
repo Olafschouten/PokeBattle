@@ -41,14 +41,20 @@ SELECT
     p.Max_Health,
     p.Resistance_Points,
     p.Weakness_Multiplier,
-	ET.EnergyType_Name AS EnergyType,
-    RT.EnergyType_Name AS ResistanceType,
-    WT.EnergyType_Name AS WeaknessType
+	ET.EnergyType_Name 	AS EnergyType,
+    ETC.Color 			AS EnergyTypeColor,
+    RT.EnergyType_Name 	AS ResistanceType,
+    RTC.Color 			AS ResistanceTypeColor,
+    WT.EnergyType_Name 	AS WeaknessType,
+    WTC.Color 			AS WeaknessTypeColor
 FROM
 	Pokemons AS p
-JOIN EnergyTypes AS ET ON p.EnergyType_Id = ET.Id
-JOIN EnergyTypes AS RT ON p.Resistance_Type_Id = RT.Id
-JOIN EnergyTypes AS WT ON p.Weakness_Type_Id = WT.Id");
+JOIN EnergyTypes AS ET 	ON p.EnergyType_Id 		= ET.Id
+JOIN EnergyTypes AS ETC ON p.EnergyType_Id 		= ETC.Id
+JOIN EnergyTypes AS RT 	ON p.Resistance_Type_Id = RT.Id
+JOIN EnergyTypes AS RTC ON p.Resistance_Type_Id	= RTC.Id
+JOIN EnergyTypes AS WT 	ON p.Weakness_Type_Id 	= WT.Id
+JOIN EnergyTypes AS WTC ON p.Weakness_Type_Id	= WTC.Id");
     $query->execute();
     $conn = null;
     return $query->fetchAll();
