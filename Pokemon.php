@@ -12,6 +12,7 @@ class Pokemon
     private $resistance = '';
     private $resistance_points = 0;
 
+    // Construct gets all data and moves it to te properties
     public function __construct($data)
     {
         $this->name = $data[0]['Pokemon_Name'];
@@ -65,6 +66,7 @@ class Pokemon
         return $this->resistance_points;
     }
 
+    // Function to handel the damage on the Pokemons
     public function fight($againstPokemon, $attack)
     {
         if (!isset($_SESSION['pokemon_health'])) {
@@ -73,7 +75,10 @@ class Pokemon
             $_SESSION['round_count'] = 1;
         }
 
+        // This keeps the fight going until some of the Pokemons are dead
         while ($_SESSION['against_pokemon_health'] >= 1 && $_SESSION['pokemon_health'] >= 1) {
+
+            // If your Pokemons energy type is equal as the opponent
             if ($this->energyType == $againstPokemon->getWeakness()) {
                 $_SESSION['against_pokemon_health'] = $_SESSION['against_pokemon_health'] - ($attack[0]['Hit_Points'] * 1.3);
             } else if ($this->energyType == $againstPokemon->getResistance()) {
@@ -82,8 +87,11 @@ class Pokemon
                 $_SESSION['against_pokemon_health'] = $_SESSION['against_pokemon_health'] - $attack[0]['Hit_Points'];
             }
 
+            // Deals damage to your Pokemon
             $_SESSION['pokemon_health'] = $_SESSION['pokemon_health'] - 10;
 
+            // Sets the health of the dead Pokemon to 0 to avoid confusion and properly view health
+            // Also it ses how won
             if ($_SESSION['against_pokemon_health'] <= 0) {
                 $_SESSION['against_pokemon_health'] = 0;
                 echo 'You won!' . '<br>';
@@ -92,6 +100,7 @@ class Pokemon
                 echo 'You loose!' . '<br>';
             }
 
+            // Prints data to show the rounds and health of the Pokemons
             echo '<br>';
             echo 'Round: ' . $_SESSION['round_count'] . '<br>';
             echo 'Your pokemon: ' . $_SESSION['pokemon_health'] . ' Health' . '</br>';

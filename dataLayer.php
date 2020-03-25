@@ -1,4 +1,5 @@
 <?php
+// ------------ Data base connect ------------ //
 
 // Database connection
 function dbConnect()
@@ -16,6 +17,9 @@ function dbConnect()
         echo "Connection failed: " . $e->getMessage();
     }
 }
+
+
+// ------------ Get all ------------ //
 
 // Get all Pokemon names
 function GetAllPokemonNames()
@@ -75,6 +79,21 @@ JOIN Attacks ON p.Id = Attacks.Pokemon_Id");
     $conn = null;
     return $query->fetchAll();
 }
+
+function GetAllEnergyTypes()
+{
+    $conn = dbConnect();
+    $query = $conn->prepare("
+SELECT 
+    EnergyType_Name
+FROM EnergyTypes");
+    $query->execute();
+    $conn = null;
+    return $query->fetchAll();
+}
+
+
+// ------------ Get Data ------------ //
 
 // Get attack data
 function GetAttackData($attack_id)
