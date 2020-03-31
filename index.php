@@ -17,7 +17,7 @@ require "dataLayer.php";
 <body class="bg-dark">
 <div class="d-flex justify-content-center">
     <div class="bg-white p-4 container">
-        <a href="test.php">test</a>
+        <a href="scraper.php">Scraper test</a>
         <h1>Choose your Pokemon</h1>
         <form method="post" action="index.php">
             <table>
