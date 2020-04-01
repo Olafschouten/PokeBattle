@@ -56,20 +56,20 @@ function getData($element, $key_name)
 //    }
 //}
 
-getData1('.ent-name', 19);
+getData1('.ent-name', 7);
 
 function getData1($element, $id)
 {
     global $html;
     global $pokemons;
     $a = 0;
-    $lastscraped = " ";
+    $lastscraped1 = " ";
+    $id--;
 
     foreach ($html->find("$element") as $data) {
-        if ($a == $id) {
-            if ($lastscraped != $data->plaintext) {
+        if ($lastscraped1 != $data->plaintext) {
+            if ($a == $id) {
                 $pokemons[$a]['Pokemon name'] = $data->plaintext;
-
                 foreach ($html->find('td.cell-icon') as $article) {
                     if ($a == $id) {
                         $item['energyType'] = $article->find('.type-icon', 0)->plaintext;
@@ -84,11 +84,11 @@ function getData1($element, $id)
                     }
                 }
             }
-            $lastscraped = $data->plaintext;
         }
         $a++;
     }
 }
+
 
 //echo "<pre>", var_dump($articles), "</pre>";
 echo "<pre>", var_dump($pokemons), "</pre>";
