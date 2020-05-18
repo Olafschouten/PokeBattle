@@ -24,7 +24,7 @@ class Pokemon
         $this->resistance_points = $data[0]['Resistance_Points'];
     }
 
-    // All getter functions
+    // Getters
     public function getName()
     {
         return $this->name;
@@ -63,6 +63,71 @@ class Pokemon
     public function getResistancePoints()
     {
         return $this->resistance_points;
+    }
+
+    // Setters
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @param mixed $energyType
+     */
+    public function setEnergyType($energyType)
+    {
+        $this->energyType = $energyType;
+    }
+
+    /**
+     * @param mixed $max_Health
+     */
+    public function setMaxHealth($max_Health)
+    {
+        $this->max_Health = $max_Health;
+    }
+
+    /**
+     * @param mixed $health
+     */
+    public function setHealth($health)
+    {
+        $this->health = $health;
+    }
+
+    /**
+     * @param mixed $weakness
+     */
+    public function setWeakness($weakness)
+    {
+        $this->weakness = $weakness;
+    }
+
+    /**
+     * @param mixed $weakness_multiplier
+     */
+    public function setWeaknessMultiplier($weakness_multiplier)
+    {
+        $this->weakness_multiplier = $weakness_multiplier;
+    }
+
+    /**
+     * @param mixed $resistance
+     */
+    public function setResistance($resistance)
+    {
+        $this->resistance = $resistance;
+    }
+
+    /**
+     * @param mixed $resistance_points
+     */
+    public function setResistancePoints($resistance_points)
+    {
+        $this->resistance_points = $resistance_points;
     }
 
     public function fight($againstPokemon, $attack)
